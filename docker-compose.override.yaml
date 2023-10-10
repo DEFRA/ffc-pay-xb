@@ -8,8 +8,7 @@ services:
     image: ffc-pay-xb-development
     container_name: ffc-pay-xb-development
     ports:
-      - "3000:3000"
-      - "9229:9229"
+      - "9110:9229"
     volumes:
       - ./app:/home/node/app
       - ./package.json:/home/node/package.json
