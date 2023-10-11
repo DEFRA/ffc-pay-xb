@@ -1,0 +1,4 @@
+resources:
+  topics:
+    - name: xb
+    - name: xbResponse

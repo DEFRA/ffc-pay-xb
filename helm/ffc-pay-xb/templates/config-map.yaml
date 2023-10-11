@@ -2,6 +2,14 @@
 {{- define "ffc-pay-xb.config-map" -}}
 data:
   NODE_ENV: {{ quote .Values.environment }}
-  PORT: {{ quote .Values.container.port }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
+  MESSAGE_QUEUE_HOST: {{ quote .Values.container.messageQueueHost }}
+  {{- if and (.Values.environmentCode) (not .Values.pr) }}
+  XB_TOPIC_ADDRESS: {{ .Values.container.xbTopicAddress }}-{{ .Values.environmentCode }}
+  XBRESPONSE_TOPIC_ADDRESS: {{ .Values.container.xbResponseTopicAddress }}-{{ .Values.environmentCode }}
+  {{ else }}
+  XB_TOPIC_ADDRESS: {{ quote .Values.container.xbTopicAddress }}
+  XBRESPONSE_TOPIC_ADDRESS: {{ quote .Values.container.xbResponseTopicAddress }}
+  {{- end }}
+  XB_SUBSCRIPTION_ADDRESS: {{ quote .Values.container.xbSubscriptionAddress }}
 {{- end -}}
