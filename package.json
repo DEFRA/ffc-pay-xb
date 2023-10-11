@@ -14,11 +14,15 @@
     "start:debug": "nodemon --inspect-brk=0.0.0.0 --ext js --legacy-watch app/index.js"
   },
   "author": "Defra",
-  "contributors": [],
+  "contributors": [
+    "John Watson john.watson1@defra.gov.uk"
+  ],
   "license": "OGL-UK-3.0",
   "dependencies": {
-    "@hapi/hapi": "20.2.2",
-    "applicationinsights": "2.3.5"
+    "applicationinsights": "2.3.5",
+    "ffc-messaging": "2.7.0",
+    "joi": "17.11.0",
+    "log-timestamp": "0.3.0"
   },
   "devDependencies": {
     "jest": "29.2.2",
