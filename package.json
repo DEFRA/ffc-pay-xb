@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-xb",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Cross Border adapter",
   "homepage": "https://github.com/DEFRA/ffc-pay-xb",
   "main": "app/index.js",
