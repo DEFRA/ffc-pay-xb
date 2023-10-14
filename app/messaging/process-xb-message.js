@@ -1,5 +1,5 @@
 const util = require('util')
-const { convertPaymentRequestToXml } = require('../conversion/convert-payment-request-to-xml')
+const { convertPaymentRequestToXml } = require('../conversion')
 const { saveToCrossBorderPaymentEngine } = require('./save-to-cross-border-payment-engine')
 
 const processXbMessage = async (message, receiver) => {
