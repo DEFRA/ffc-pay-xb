@@ -23,6 +23,7 @@
     "ffc-messaging": "2.7.0",
     "joi": "17.11.0",
     "log-timestamp": "0.3.0",
+    "moment": "2.29.4",
     "xml2js": "0.6.2"
   },
   "devDependencies": {

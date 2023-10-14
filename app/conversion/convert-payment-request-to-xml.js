@@ -1,4 +1,6 @@
 const xml2js = require('xml2js')
+const moment = require('moment')
+const { convertToPounds } = require('../currency-convert')
 
 const convertPaymentRequestToXml = (paymentRequest) => {
   const formattedPaymentRequest = {
@@ -7,12 +9,72 @@ const convertPaymentRequestToXml = (paymentRequest) => {
         'xmlns:ns0': 'http://RPA.Integration.CalcNPay.Schemas.CalcNPayDebachedSchema/v1.1',
         ID: 0
       },
-      Header: {},
-      Batch: {},
+      Header: {
+        SourceSystem: 'Payment Hub',
+        DestinationSystem: 'Cross Border',
+        SourceMessageID: '0',
+        LastStep: 'CalcNPay_BTS_RouterProcess',
+        LastStepStatus: 'Success',
+        NextStep: 'CalcNPay_BTS_CrossBorderProcess',
+        NextStepType: 'Step',
+        DateCreated: moment().format('YYYY-MM-DDTHH:mm:ss:SSS'),
+        ManuallyAmendedBy: '',
+        DebtReason: '',
+        QualityCheckResult: '',
+        SplitID: ''
+      },
+      Batch: {
+        $: {
+          InvoiceType: 'AP',
+          CreatorID: 'SITI AGRI SYS',
+          BatchID: 'TODO',
+          BatchValue: convertToPounds(paymentRequest.value),
+          NumberOfInvoices: 1,
+          ExportDate: 'TODO'
+        }
+      },
       Requests: {
+        $: {
+          MarketingYear: paymentRequest.marketingYear
+        },
         Request: {
-          Invoice: {},
-          InvoiceLines: {}
+          Invoice: {
+            $: {
+              InvoiceCorrectionReference: '',
+              RecoveryDate: '',
+              OriginalSettlementDate: '',
+              OriginalInvoiceNumber: '',
+              PaymentPreferenceCurrency: paymentRequest.currency,
+              DeliveryBody: 'CB00',
+              TotalAmount: convertToPounds(paymentRequest.value),
+              Pillar: 1,
+              FRN: paymentRequest.frn,
+              ClaimNumber: paymentRequest.contractNumber,
+              RequestInvoiceNumber: paymentRequest.paymentRequestNumber,
+              InvoiceNumber: 'TODO',
+              InvoiceType: 'AP',
+              SplitID: 1
+            }
+          },
+          InvoiceLines: {
+            InvoiceLine: paymentRequest.invoiceLines.map((invoiceLine, index) => ({
+              $: {
+                DeliveryBody: 'CB00',
+                InvoiceNumber: 'TODO',
+                DebtType: '',
+                AdjustmentValue: '',
+                OriginalValue: convertToPounds(invoiceLine.value),
+                DueDate: moment(paymentRequest.dueDate).format('YYYY-MM-DD'),
+                LineTypeDescription: invoiceLine.description,
+                LineID: index + 1,
+                Fund: invoiceLine.fundCode,
+                SchemeCode: invoiceLine.schemeCode,
+                MarketingYear: paymentRequest.marketingYear,
+                Value: convertToPounds(invoiceLine.value),
+                SplitID: 1
+              }
+            }))
+          }
         }
       }
     }
