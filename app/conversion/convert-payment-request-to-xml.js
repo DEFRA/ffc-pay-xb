@@ -1,6 +1,9 @@
 const xml2js = require('xml2js')
 const moment = require('moment')
-const { convertToPounds } = require('../currency-convert')
+const { getBatchId } = require('./get-batch-id')
+const { getBatchExportDate } = require('./get-batch-export-date')
+const { convertInvoiceNumberForXml } = require('./convert-invoice-number-for-xml')
+const { convertToPounds } = require('./currency-convert')
 
 const convertPaymentRequestToXml = (paymentRequest) => {
   const formattedPaymentRequest = {
@@ -27,10 +30,10 @@ const convertPaymentRequestToXml = (paymentRequest) => {
         $: {
           InvoiceType: 'AP',
           CreatorID: 'SITI AGRI SYS',
-          BatchID: 'TODO',
+          BatchID: getBatchId(paymentRequest.batch),
           BatchValue: convertToPounds(paymentRequest.value),
           NumberOfInvoices: 1,
-          ExportDate: 'TODO'
+          ExportDate: getBatchExportDate(paymentRequest.batch)
         }
       },
       Requests: {
@@ -51,7 +54,7 @@ const convertPaymentRequestToXml = (paymentRequest) => {
               FRN: paymentRequest.frn,
               ClaimNumber: paymentRequest.contractNumber,
               RequestInvoiceNumber: paymentRequest.paymentRequestNumber,
-              InvoiceNumber: 'TODO',
+              InvoiceNumber: convertInvoiceNumberForXml(paymentRequest.invoiceNumber),
               InvoiceType: 'AP',
               SplitID: 1
             }
@@ -60,7 +63,7 @@ const convertPaymentRequestToXml = (paymentRequest) => {
             InvoiceLine: paymentRequest.invoiceLines.map((invoiceLine, index) => ({
               $: {
                 DeliveryBody: 'CB00',
-                InvoiceNumber: 'TODO',
+                InvoiceNumber: convertInvoiceNumberForXml(paymentRequest.invoiceNumber),
                 DebtType: '',
                 AdjustmentValue: '',
                 OriginalValue: convertToPounds(invoiceLine.value),
