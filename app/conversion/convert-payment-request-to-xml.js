@@ -10,7 +10,7 @@ const convertPaymentRequestToXml = (paymentRequest) => {
     Root: {
       $: {
         'xmlns:ns0': 'http://RPA.Integration.CalcNPay.Schemas.CalcNPayDebachedSchema/v1.1',
-        ID: `9${paymentRequest.paymentRequestId.padStart(6, '0')}`
+        ID: `9${paymentRequest.paymentRequestId.padStart(9, '0')}`
       },
       Header: {
         SourceSystem: 'Payment Hub',
