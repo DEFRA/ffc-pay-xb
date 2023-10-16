@@ -7,18 +7,18 @@
     <LastStepStatus>Success</LastStepStatus>
     <NextStep>CalcNPay_BTS_CrossBorderProcess</NextStep>
     <NextStepType>Step</NextStepType>
-    <DateCreated>2023-10-14T11:59:24.290</DateCreated>
-    <ManuallyAmendedBy />
-    <DebtReason />
-    <QualityCheckResult />
-    <SplitID />
+    <DateCreated>2023-01-01T00:00:00:000</DateCreated>
+    <ManuallyAmendedBy/>
+    <DebtReason/>
+    <QualityCheckResult/>
+    <SplitID/>
   </Header>
-  <Batch InvoiceType="AP" CreatorID="SITI AGRI SYS" BatchID="1" BatchValue="2000" NumberOfInvoices="2" ExportDate="2023-03-14" />
+  <Batch InvoiceType="AP" CreatorID="SITI AGRI SYS" BatchID="1" BatchValue="1000.00" NumberOfInvoices="1" ExportDate="2023-03-14"/>
   <Requests MarketingYear="2023">
     <Request>
-      <Invoice InvoiceCorrectionReference="" RecoveryDate="" OriginalSettlementDate="" OriginalInvoiceNumber="" PaymentPreferenceCurrency="GBP" DeliveryBody="CB00" TotalAmount="1000" Pillar="1" FRN="1000000002" ClaimNumber="C0000002" RequestInvoiceNumber="001" InvoiceNumber="PFSY0000002" InvoiceType="AP" SplitId="1" />
+      <Invoice InvoiceCorrectionReference="" RecoveryDate="" OriginalSettlementDate="" OriginalInvoiceNumber="" PaymentPreferenceCurrency="GBP" DeliveryBody="CB00" TotalAmount="1000.00" Pillar="1" FRN="1000000002" ClaimNumber="C0000002" RequestInvoiceNumber="001" InvoiceNumber="PFSY0000002" InvoiceType="AP" SplitId="1"/>
       <InvoiceLines>
-        <InvoiceLine DeliveryBody="CB00" InvoiceNumber="PFSY0000002" DebtType="" AdjustmentValue="" OriginalValue="1000" DueDate="2023-12-01" LineTypeDescription="G00 - Gross value of claim" LineID="1" Fund="EGF00" SchemeCode="10501" MarketingYear="2023" Value="1000" SplitId="1" />
+        <InvoiceLine DeliveryBody="CB00" InvoiceNumber="PFSY0000002" DebtType="" AdjustmentValue="" OriginalValue="1000.00" DueDate="2023-12-01" LineTypeDescription="G00 - Gross value of claim" LineID="1" Fund="EGF00" SchemeCode="10501" MarketingYear="2023" Value="1000.00" SplitId="1"/>
       </InvoiceLines>
     </Request>
   </Requests>

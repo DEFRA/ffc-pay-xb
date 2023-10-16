@@ -1,3 +1,6 @@
+jest.useFakeTimers()
+jest.setSystemTime(new Date(2023, 0, 1))
+
 const fs = require('fs')
 const path = require('path')
 
@@ -9,6 +12,6 @@ const json = fs.readFileSync(path.resolve(__dirname, '../../../mocks/json.json')
 describe('convert payment request to xml', () => {
   test('should convert payment request to xml', () => {
     const result = convertPaymentRequestToXml(JSON.parse(json))
-    expect(result).toBe(xml)
+    expect(result).toBe(xml.trim())
   })
 })

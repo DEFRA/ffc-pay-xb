@@ -16,7 +16,7 @@ const convertPaymentRequestToXml = (paymentRequest) => {
       Header: {
         SourceSystem: 'Payment Hub',
         DestinationSystem: 'Cross Border',
-        SourceMessageID: getId(paymentRequest.paymentRequestId),
+        SourceMessageId: getId(paymentRequest.paymentRequestId),
         LastStep: 'CalcNPay_BTS_RouterProcess',
         LastStepStatus: 'Success',
         NextStep: 'CalcNPay_BTS_CrossBorderProcess',
@@ -54,10 +54,10 @@ const convertPaymentRequestToXml = (paymentRequest) => {
               Pillar: 1,
               FRN: paymentRequest.frn,
               ClaimNumber: paymentRequest.contractNumber,
-              RequestInvoiceNumber: paymentRequest.paymentRequestNumber,
+              RequestInvoiceNumber: paymentRequest.paymentRequestNumber.toString().padStart('3', '0'),
               InvoiceNumber: convertInvoiceNumberForXml(paymentRequest.invoiceNumber),
               InvoiceType: 'AP',
-              SplitID: 1
+              SplitId: 1
             }
           },
           InvoiceLines: {
@@ -68,14 +68,14 @@ const convertPaymentRequestToXml = (paymentRequest) => {
                 DebtType: '',
                 AdjustmentValue: '',
                 OriginalValue: convertToPounds(invoiceLine.value),
-                DueDate: moment(paymentRequest.dueDate).format('YYYY-MM-DD'),
+                DueDate: moment(paymentRequest.dueDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
                 LineTypeDescription: invoiceLine.description,
                 LineID: index + 1,
                 Fund: invoiceLine.fundCode,
                 SchemeCode: invoiceLine.schemeCode,
                 MarketingYear: paymentRequest.marketingYear,
                 Value: convertToPounds(invoiceLine.value),
-                SplitID: 1
+                SplitId: 1
               }
             }))
           }
@@ -84,7 +84,7 @@ const convertPaymentRequestToXml = (paymentRequest) => {
     }
   }
 
-  const builder = new xml2js.Builder()
+  const builder = new xml2js.Builder({ headless: true })
   return builder.buildObject(formattedPaymentRequest)
 }
 
