@@ -23,7 +23,7 @@ const { processXbMessage } = require('../../../app/messaging/process-xb-message'
 describe('process cross border message', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    mockConvertPaymentRequestToXml.mockReturnValue(convertedPaymentRequest)
+    mockConvertPaymentRequestToXml.mockReturnValue({ id: 1, convertedPaymentRequest })
   })
 
   test('should convert payment to xml', async () => {
@@ -33,7 +33,7 @@ describe('process cross border message', () => {
 
   test('should save converted payment to cross border payment engine', async () => {
     await processXbMessage(message, receiver)
-    expect(mockSaveToCrossBorderPaymentEngine).toHaveBeenCalledWith(convertedPaymentRequest)
+    expect(mockSaveToCrossBorderPaymentEngine).toHaveBeenCalledWith(1, convertedPaymentRequest)
   })
 
   test('should complete message if successfully processed', async () => {
