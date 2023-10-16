@@ -1,8 +1,8 @@
-<Root xmlns:ns0="http://RPA.Integration.CalcNPay.Schemas.CalcNPayDebachedSchema/v1.1" ID="2">
+<Root xmlns:ns0="http://RPA.Integration.CalcNPay.Schemas.CalcNPayDebachedSchema/v1.1" ID="900000002">
   <Header>
-    <SourceSystem>Payment Batch Processor</SourceSystem>
+    <SourceSystem>Payment Hub</SourceSystem>
     <DestinationSystem>Cross Border</DestinationSystem>
-    <SourceMessageId>2</SourceMessageId>
+    <SourceMessageId>900000002</SourceMessageId>
     <LastStep>CalcNPay_BTS_RouterProcess</LastStep>
     <LastStepStatus>Success</LastStepStatus>
     <NextStep>CalcNPay_BTS_CrossBorderProcess</NextStep>

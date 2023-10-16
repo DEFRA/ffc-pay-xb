@@ -1,5 +1,6 @@
 const xml2js = require('xml2js')
 const moment = require('moment')
+const { getId } = require('./get-id')
 const { getBatchId } = require('./get-batch-id')
 const { getBatchExportDate } = require('./get-batch-export-date')
 const { convertInvoiceNumberForXml } = require('./convert-invoice-number-for-xml')
@@ -10,12 +11,12 @@ const convertPaymentRequestToXml = (paymentRequest) => {
     Root: {
       $: {
         'xmlns:ns0': 'http://RPA.Integration.CalcNPay.Schemas.CalcNPayDebachedSchema/v1.1',
-        ID: `9${paymentRequest.paymentRequestId.toString().padStart(8, '0')}`
+        ID: getId(paymentRequest.paymentRequestId)
       },
       Header: {
         SourceSystem: 'Payment Hub',
         DestinationSystem: 'Cross Border',
-        SourceMessageID: '0',
+        SourceMessageID: getId(paymentRequest.paymentRequestId),
         LastStep: 'CalcNPay_BTS_RouterProcess',
         LastStepStatus: 'Success',
         NextStep: 'CalcNPay_BTS_CrossBorderProcess',
