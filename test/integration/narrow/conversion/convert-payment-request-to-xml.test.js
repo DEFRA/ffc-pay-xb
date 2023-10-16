@@ -12,6 +12,6 @@ const json = fs.readFileSync(path.resolve(__dirname, '../../../mocks/json.json')
 describe('convert payment request to xml', () => {
   test('should convert payment request to xml', () => {
     const result = convertPaymentRequestToXml(JSON.parse(json))
-    expect(result).toBe(xml.trim())
+    expect(result.convertedPaymentRequest).toBe(xml.trim())
   })
 })
