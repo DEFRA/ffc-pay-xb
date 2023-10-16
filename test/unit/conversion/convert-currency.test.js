@@ -1,4 +1,4 @@
-const { convertToPence, convertToPounds } = require('../../app/conversion/currency-convert')
+const { convertToPence, convertToPounds } = require('../../../app/conversion/currency-convert')
 
 describe('convert currency', () => {
   test('converts 100 to pence', () => {
