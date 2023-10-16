@@ -12,4 +12,5 @@ data:
   XBRESPONSE_TOPIC_ADDRESS: {{ quote .Values.container.xbResponseTopicAddress }}
   {{- end }}
   XB_SUBSCRIPTION_ADDRESS: {{ quote .Values.container.xbSubscriptionAddress }}
+  ACTIVE: {{ quote .Values.container.active }}
 {{- end -}}

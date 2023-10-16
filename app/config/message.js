@@ -1,6 +1,7 @@
 const Joi = require('joi')
 
 const schema = Joi.object({
+  active: Joi.bool().default(true),
   messageQueue: {
     host: Joi.string().required(),
     username: Joi.string(),
@@ -18,6 +19,7 @@ const schema = Joi.object({
   }
 })
 const config = {
+  active: process.env.MESSAGE_QUEUE_ACTIVE,
   messageQueue: {
     host: process.env.MESSAGE_QUEUE_HOST,
     username: process.env.MESSAGE_QUEUE_USER,
@@ -46,6 +48,7 @@ const xbSubscription = { ...result.value.messageQueue, ...result.value.xbSubscri
 const responseTopic = { ...result.value.messageQueue, ...result.value.responseTopic }
 
 module.exports = {
+  active: result.value.active,
   xbSubscription,
   responseTopic
 }

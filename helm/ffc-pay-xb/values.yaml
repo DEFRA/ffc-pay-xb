@@ -29,6 +29,7 @@ container:
   xbTopicAddress: ffc-pay-xb
   xbSubscriptionAddress: ffc-pay-xb
   xbResponseTopicAddress: ffc-pay-xb-response
+  active: true
 
 aadPodIdentity: true
 
