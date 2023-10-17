@@ -28,8 +28,5 @@ services:
       MSSQL_SA_PASSWORD: ThisIsNotReal!123
     volumes:
       - ./scripts/mssql:/usr/config
-    entrypoint: >
-      sh -c "
-        /usr/config/configure-db &
-        /opt/mssql/bin/sqlservr"
+    entrypoint: /usr/config/entrypoint.sh
   
