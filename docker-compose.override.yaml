@@ -12,6 +12,11 @@ services:
     volumes:
       - ./app:/home/node/app
       - ./package.json:/home/node/package.json
+      - ./scripts:/home/node/scripts
+    entrypoint: >
+      sh -c "
+        ./scripts/wait-for ffc-pay-xb-mssql:1433 --
+        npm run start:watch"
 
   ffc-pay-xb-mssql:
     ports:

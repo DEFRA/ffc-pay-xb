@@ -1,5 +1,5 @@
-jest.useFakeTimers()
-jest.setSystemTime(new Date(2023, 0, 1))
+// jest.useFakeTimers()
+// jest.setSystemTime(new Date(2023, 0, 1))
 
 const fs = require('fs')
 const path = require('path')
@@ -7,7 +7,6 @@ const sql = require('mssql')
 
 const { databaseConfig } = require('../../../app/config')
 
-// const xml = fs.readFileSync(path.resolve(__dirname, '../../mocks/xml.xml'), 'utf8')
 const json = fs.readFileSync(path.resolve(__dirname, '../../mocks/json.json'), 'utf8')
 
 const receiver = {
@@ -23,18 +22,9 @@ const message = {
 const { processXbMessage } = require('../../../app/messaging/process-xb-message')
 
 describe('process cross border message', () => {
-  beforeAll(async () => {
-    console.log(databaseConfig)
-    await sql.connect(databaseConfig)
-  })
-
   beforeEach(async () => {
-    jest.clearAllMocks()
-    await sql.query`TRUNCATE TABLE messages RESTART IDENTITY;`
-  })
-
-  afterAll(() => {
-    sql.close()
+    await sql.connect(databaseConfig)
+    await sql.query`DELETE FROM messages`
   })
 
   test('should save one cross border record to database per message', async () => {
@@ -46,6 +36,18 @@ describe('process cross border message', () => {
   test('should save payment request id as invoice_id', async () => {
     await processXbMessage(message, receiver)
     const result = await sql.query`SELECT * FROM messages`
-    expect(result.recordset[0].invoice_id).toBe('PR-1234')
+    expect(result.recordset[0].invoice_id).toBe(900000002)
+  })
+
+  test('should save payment request as message_in', async () => {
+    await processXbMessage(message, receiver)
+    const result = await sql.query`SELECT * FROM messages`
+    expect(result.recordset[0].message_in).toMatch('<Root xmlns:ns0="http://RPA.Integration.CalcNPay.Schemas.CalcNPayDebachedSchema/v1.1" ID="900000002">')
+  })
+
+  test('should save current date as received', async () => {
+    await processXbMessage(message, receiver)
+    const result = await sql.query`SELECT * FROM messages`
+    expect(result.recordset[0].received).toBeDefined()
   })
 })
