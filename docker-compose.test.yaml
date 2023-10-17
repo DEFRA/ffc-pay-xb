@@ -17,7 +17,7 @@ services:
     entrypoint: >
       sh -c "
         ./scripts/wait-for ffc-pay-xb-mssql:1433 --
-        npm run test:watch"
+        npm run test"
 
   ffc-pay-xb-mssql:
     volumes:
