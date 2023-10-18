@@ -13,4 +13,7 @@ data:
   {{- end }}
   XB_SUBSCRIPTION_ADDRESS: {{ quote .Values.container.xbSubscriptionAddress }}
   ACTIVE: {{ quote .Values.container.active }}
+  MSSQL_HOST: {{ quote .Values.container.mssqlHost }}
+  MSSQL_USER: {{ quote .Values.container.mssqlUser }}
+  MSSQL_DB: {{ quote .Values.container.mssqlDb }}
 {{- end -}}

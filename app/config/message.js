@@ -19,7 +19,7 @@ const schema = Joi.object({
   }
 })
 const config = {
-  active: process.env.MESSAGE_QUEUE_ACTIVE,
+  active: process.env.ACTIVE,
   messageQueue: {
     host: process.env.MESSAGE_QUEUE_HOST,
     username: process.env.MESSAGE_QUEUE_USER,
