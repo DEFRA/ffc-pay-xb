@@ -5,6 +5,8 @@ services:
       target: production
     image: ffc-pay-xb
     container_name: ffc-pay-xb
+    depends_on:
+      - ffc-pay-xb-mssql
     environment:
       APPINSIGHTS_CLOUDROLE: ffc-pay-xb-local
       APPINSIGHTS_CONNECTIONSTRING: ${APPINSIGHTS_CONNECTIONSTRING}
@@ -14,3 +16,17 @@ services:
       XB_TOPIC_ADDRESS: ${XB_TOPIC_ADDRESS:-ffc-pay-xb}${MESSAGE_QUEUE_SUFFIX}
       XB_SUBSCRIPTION_ADDRESS: ${XB_SUBSCRIPTION_ADDRESS:-ffc-pay-xb}${MESSAGE_QUEUE_SUFFIX}
       XBRESPONSE_TOPIC_ADDRESS: ${XBRESPONSE_TOPIC_ADDRESS:-ffc-pay-xb-response}${MESSAGE_QUEUE_SUFFIX}
+      MSSQL_HOST: ffc-pay-xb-mssql
+      MSSQL_USER: sa
+      MSSQL_PASSWORD: ThisIsNotReal!123
+      MSSQL_DB: "RPA.Finance.CrossBorder.PaymentEngine"
+
+  ffc-pay-xb-mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: ThisIsNotReal!123
+    volumes:
+      - ./scripts/mssql:/usr/config
+    entrypoint: /usr/config/entrypoint.sh
+  

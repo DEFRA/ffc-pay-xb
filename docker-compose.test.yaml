@@ -7,10 +7,21 @@ services:
       target: development
     image: ffc-pay-xb-development
     container_name: ffc-pay-xb-test
-    command: npm run test
     volumes:
       - ./app:/home/node/app
       - ./test:/home/node/test
       - ./test-output:/home/node/test-output
       - ./jest.config.js:/home/node/jest.config.js
       - ./package.json:/home/node/package.json
+      - ./scripts:/home/node/scripts
+    entrypoint: >
+      sh -c "
+        ./scripts/wait-for ffc-pay-xb-mssql:1433 --
+        npm run test"
+
+  ffc-pay-xb-mssql:
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+volumes:
+  mssql_data:

@@ -1,6 +1,8 @@
 services:
   ffc-pay-xb:
-    command: >
-      sh -c "npm run test:watch"
+    entrypoint: >
+      sh -c "
+        ./scripts/wait-for ffc-pay-xb-mssql:1433 --
+        npm run test:watch"
     volumes:
       - ./.git:/home/node/.git

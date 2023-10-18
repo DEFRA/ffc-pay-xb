@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-xb",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Cross Border adapter",
   "homepage": "https://github.com/DEFRA/ffc-pay-xb",
   "main": "app/index.js",
@@ -24,6 +24,7 @@
     "joi": "17.11.0",
     "log-timestamp": "0.3.0",
     "moment": "2.29.4",
+    "mssql": "10.0.1",
     "xml2js": "0.6.2"
   },
   "devDependencies": {

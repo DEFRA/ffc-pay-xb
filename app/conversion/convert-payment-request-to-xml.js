@@ -7,16 +7,17 @@ const { convertInvoiceNumberForXml } = require('./convert-invoice-number-for-xml
 const { convertToPounds } = require('./currency-convert')
 
 const convertPaymentRequestToXml = (paymentRequest) => {
+  const id = getId(paymentRequest.paymentRequestId)
   const formattedPaymentRequest = {
     Root: {
       $: {
         'xmlns:ns0': 'http://RPA.Integration.CalcNPay.Schemas.CalcNPayDebachedSchema/v1.1',
-        ID: getId(paymentRequest.paymentRequestId)
+        ID: id
       },
       Header: {
         SourceSystem: 'Payment Hub',
         DestinationSystem: 'Cross Border',
-        SourceMessageId: getId(paymentRequest.paymentRequestId),
+        SourceMessageId: id,
         LastStep: 'CalcNPay_BTS_RouterProcess',
         LastStepStatus: 'Success',
         NextStep: 'CalcNPay_BTS_CrossBorderProcess',
@@ -85,7 +86,11 @@ const convertPaymentRequestToXml = (paymentRequest) => {
   }
 
   const builder = new xml2js.Builder({ headless: true })
-  return builder.buildObject(formattedPaymentRequest)
+  const convertedPaymentRequest = builder.buildObject(formattedPaymentRequest)
+  return {
+    id,
+    convertedPaymentRequest
+  }
 }
 
 module.exports = {

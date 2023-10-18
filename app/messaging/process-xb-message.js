@@ -6,8 +6,8 @@ const processXbMessage = async (message, receiver) => {
   try {
     const paymentRequest = message.body
     console.log('Cross Border payment request received:', util.inspect(paymentRequest, false, null, true))
-    const convertedPaymentRequest = convertPaymentRequestToXml(paymentRequest)
-    await saveToCrossBorderPaymentEngine(convertedPaymentRequest)
+    const { id, convertedPaymentRequest } = convertPaymentRequestToXml(paymentRequest)
+    await saveToCrossBorderPaymentEngine(id, convertedPaymentRequest)
     await receiver.completeMessage(message)
   } catch (err) {
     console.error('Unable to process payment request:', err)
