@@ -1,5 +1,6 @@
 jest.mock('../../app/messaging')
 const { start: mockStartMessaging } = require('../../app/messaging')
+jest.mock('../../app/responses')
 const { start: mockStartResponses } = require('../../app/responses')
 
 describe('app start', () => {

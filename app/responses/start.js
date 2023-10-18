@@ -1,4 +1,4 @@
-const { responseConfig } = require('../../config')
+const { responseConfig } = require('../config')
 const { processResponses } = require('./process-responses')
 
 const start = async () => {
