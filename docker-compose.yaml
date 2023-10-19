@@ -20,6 +20,7 @@ services:
       MSSQL_USER: sa
       MSSQL_PASSWORD: ThisIsNotReal!123
       MSSQL_DB: "RPA.Finance.CrossBorder.PaymentEngine"
+      RESPONSE_INTERVAL: 10000
 
   ffc-pay-xb-mssql:
     image: mcr.microsoft.com/mssql/server:2022-latest

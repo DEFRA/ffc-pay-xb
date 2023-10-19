@@ -1,5 +1,7 @@
 jest.mock('../../app/messaging')
 const { start: mockStartMessaging } = require('../../app/messaging')
+jest.mock('../../app/responses')
+const { start: mockStartResponses } = require('../../app/responses')
 
 describe('app start', () => {
   beforeEach(() => {
@@ -8,5 +10,9 @@ describe('app start', () => {
 
   test('starts messaging', async () => {
     expect(mockStartMessaging).toHaveBeenCalledTimes(1)
+  })
+
+  test('starts responses', async () => {
+    expect(mockStartResponses).toHaveBeenCalledTimes(1)
   })
 })

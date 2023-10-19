@@ -6,3 +6,4 @@ services:
         npm run test:watch"
     volumes:
       - ./.git:/home/node/.git
+      - ./scripts:/home/node/scripts

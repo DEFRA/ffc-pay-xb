@@ -30,6 +30,10 @@ container:
   xbSubscriptionAddress: ffc-pay-xb
   xbResponseTopicAddress: ffc-pay-xb-response
   active: true
+  mssqlHost: ffc-pay-xb-mssql
+  mssqlDb: RPA.Finance.CrossBorder.PaymentEngine (Production)
+  mssqlUser: not-real
+  mssqlPassword: not-real
 
 aadPodIdentity: true
 

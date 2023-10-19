@@ -1,6 +1,3 @@
-// jest.useFakeTimers()
-// jest.setSystemTime(new Date(2023, 0, 1))
-
 const fs = require('fs')
 const path = require('path')
 const sql = require('mssql')
