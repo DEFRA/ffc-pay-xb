@@ -18,15 +18,15 @@ const convertPaymentRequestToJson = async (paymentRequest) => {
     paymentRequestNumber: Number(json.Root.Requests[0].Request[0].Invoice[0].$.RequestInvoiceNumber),
     currency: json.Root.Requests[0].Request[0].Invoice[0].$.PaymentPreferenceCurrency,
     value: convertToPence(json.Root.Requests[0].Request[0].Invoice[0].$.TotalAmount),
-    invoiceLines: json.Root.Requests[0].Request[0].InvoiceLines.map(x => ({
-      schemeCode: x.InvoiceLine[0].$.SchemeCode,
-      fundCode: x.InvoiceLine[0].$.Fund,
+    invoiceLines: json.Root.Requests[0].Request[0].InvoiceLines[0].InvoiceLine.map(x => ({
+      schemeCode: x.$.SchemeCode,
+      fundCode: x.$.Fund,
       agreementNumber: json.Root.Requests[0].Request[0].Invoice[0].$.ClaimNumber,
-      description: x.InvoiceLine[0].$.LineTypeDescription,
-      value: convertToPence(x.InvoiceLine[0].$.Value),
+      description: x.$.LineTypeDescription,
+      value: convertToPence(x.$.Value),
       convergence: false,
-      deliveryBody: x.InvoiceLine[0].$.DeliveryBody,
-      marketingYear: x.InvoiceLine[0].$.MarketingYear,
+      deliveryBody: x.$.DeliveryBody,
+      marketingYear: x.$.MarketingYear,
       stateAid: false
     }))
   }
