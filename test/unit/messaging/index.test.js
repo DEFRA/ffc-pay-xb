@@ -62,4 +62,8 @@ describe('start and stop functions', () => {
 
     closeConnectionSpy.mockRestore()
   })
+  test('stop function when receiver is undefined', async () => {
+    await stop()
+    // No error should be thrown when receiver is undefined
+  })
 })
