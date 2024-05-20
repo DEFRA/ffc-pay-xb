@@ -18,7 +18,9 @@ const start = async () => {
 }
 
 const stop = async () => {
-  await receiver.closeConnection()
+  if (receiver) {
+    await receiver.closeConnection()
+  }
 }
 
 module.exports = { start, stop }
