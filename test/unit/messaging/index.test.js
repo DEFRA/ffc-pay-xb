@@ -1,7 +1,6 @@
 const { start, stop } = require('../../../app/messaging')
 const { MessageReceiver } = require('ffc-messaging')
 const { processXbMessage } = require('../../../app/messaging/process-xb-message.js')
-// const { keepAlive } = require('../../../app/messaging/keep-alive')
 const { keepAlive } = jest.requireActual('../../../app/messaging/keep-alive')
 const { messageConfig } = require('../../../app/config')
 
@@ -52,8 +51,17 @@ describe('start and stop functions', () => {
     expect(console.log).toHaveBeenCalledWith('Cross Border adapter is not active')
   })
 
-  test('stop function', async () => {
+  test('stop function when receiver is defined', async () => {
     messageConfig.active = true
+
+    MessageReceiver.mockImplementation(() => {
+      const instance = {
+        subscribe: jest.fn(),
+        closeConnection: jest.fn()
+      }
+      receiverInstances.push(instance)
+      return instance
+    })
 
     await start()
 
@@ -66,6 +74,7 @@ describe('start and stop functions', () => {
 
     closeConnectionSpy.mockRestore()
   })
+
   test('stop function when receiver is undefined', async () => {
     await stop()
     // No error should be thrown when receiver is undefined
