@@ -1,4 +1,4 @@
-const { start: startMessaging, stop: stopMessaging } = require('../../../app/messaging')
+const { start, stop } = require('../../../app/messaging')
 const { MessageReceiver } = require('ffc-messaging')
 const { processXbMessage } = require('../../../app/messaging/process-xb-message.js')
 const { keepAlive } = require('../../../app/messaging/keep-alive')
@@ -34,7 +34,7 @@ describe('start and stop functions', () => {
       return instance
     })
 
-    await startMessaging()
+    await start()
 
     expect(MessageReceiver).toHaveBeenCalled()
     expect(processXbMessage).toHaveBeenCalledWith('mock message', expect.anything())
@@ -43,7 +43,7 @@ describe('start and stop functions', () => {
 
   test('start function when messageConfig is not active', async () => {
     messageConfig.active = false
-    await startMessaging()
+    await start()
     expect(keepAlive).toHaveBeenCalled()
     expect(console.log).toHaveBeenCalledWith('Cross Border adapter is not active')
   })
@@ -51,12 +51,12 @@ describe('start and stop functions', () => {
   test('stop function', async () => {
     messageConfig.active = true
 
-    await startMessaging()
+    await start()
 
     const receiver = receiverInstances[receiverInstances.length - 1]
     const closeConnectionSpy = jest.spyOn(receiver, 'closeConnection')
 
-    await stopMessaging()
+    await stop()
 
     expect(closeConnectionSpy).toHaveBeenCalled()
 
