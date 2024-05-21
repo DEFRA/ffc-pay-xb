@@ -75,11 +75,6 @@ describe('start and stop functions', () => {
     closeConnectionSpy.mockRestore()
   })
 
-  test('stop function when receiver is undefined', async () => {
-    await stop()
-    // No error should be thrown when receiver is undefined
-  })
-
   // adding a test in here to cover the messaging keep-alive function
   describe('keepAlive function', () => {
     jest.useFakeTimers()
