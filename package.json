@@ -21,7 +21,7 @@
   "dependencies": {
     "applicationinsights": "2.3.5",
     "ffc-messaging": "2.7.0",
-    "joi": "17.11.0",
+    "joi": "17.13.3",
     "log-timestamp": "0.3.0",
     "moment": "2.29.4",
     "mssql": "10.0.1",
