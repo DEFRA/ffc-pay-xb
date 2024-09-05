@@ -3,7 +3,7 @@ const { convertPaymentRequestToXml: mockConvertPaymentRequestToXml } = require('
 
 jest.mock('../../../app/messaging/save-to-cross-border-payment-engine')
 const { saveToCrossBorderPaymentEngine: mockSaveToCrossBorderPaymentEngine } = require('../../../app/messaging/save-to-cross-border-payment-engine')
-
+// Test comment
 const receiver = {
   completeMessage: jest.fn(),
   abandonMessage: jest.fn(),
