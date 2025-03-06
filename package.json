@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-xb",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Cross Border adapter",
   "homepage": "https://github.com/DEFRA/ffc-pay-xb",
   "main": "app/index.js",
@@ -16,7 +16,8 @@
   "author": "Defra",
   "contributors": [
     "John Watson john.watson1@defra.gov.uk",
-    "Leigh Godson leigh.godson.external@eviden.com"
+    "Leigh Godson leigh.godson.external@eviden.com",
+    "Oliver Lewington oliver.lewington@eviden.com"
   ],
   "license": "OGL-UK-3.0",
   "dependencies": {
