@@ -35,7 +35,7 @@ container:
   mssqlUser: not-real
   mssqlPassword: not-real
 
-aadPodIdentity: true
+workloadIdentity: true
 
 azureIdentity:
   clientID: not-a-real-clientID

@@ -1,4 +1,9 @@
 resources:
+  identity: pay-xb
   topics:
-    - name: xb
-    - name: xbResponse
+    - name: ffc-pay-xb
+      role: receiver
+      subscriptions:
+        - name: ffc-pay-xb
+    - name: ffc-pay-xb-response
+      role: sender
