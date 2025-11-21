@@ -1,33 +1,13 @@
 const { getBatchId } = require('../../../app/conversion/get-batch-id')
 
 describe('get batch id', () => {
-  test('should return batch id as number', () => {
-    const batch = 'SITI_0001_AP_1234.dat'
-    const result = getBatchId(batch)
-    expect(result).toBe(1)
-  })
-
-  test('should return batch id as number when batch id is 2 digits', () => {
-    const batch = 'SITI_0010_AP_1234.dat'
-    const result = getBatchId(batch)
-    expect(result).toBe(10)
-  })
-
-  test('should return batch id as number when batch id is 3 digits', () => {
-    const batch = 'SITI_0100_AP_1234.dat'
-    const result = getBatchId(batch)
-    expect(result).toBe(100)
-  })
-
-  test('should return batch id as number when batch id is 4 digits', () => {
-    const batch = 'SITI_1000_AP_1234.dat'
-    const result = getBatchId(batch)
-    expect(result).toBe(1000)
-  })
-
-  test('should return batch id as 1 if no batch id', () => {
-    const batch = 'SITI_AP_1234.dat'
-    const result = getBatchId(batch)
-    expect(result).toBe(1)
+  test.each([
+    ['SITI_0001_AP_1234.dat', 1],
+    ['SITI_0010_AP_1234.dat', 10],
+    ['SITI_0100_AP_1234.dat', 100],
+    ['SITI_1000_AP_1234.dat', 1000],
+    ['SITI_AP_1234.dat', 1]
+  ])('returns %s → %s', (filename, expected) => {
+    expect(getBatchId(filename)).toBe(expected)
   })
 })

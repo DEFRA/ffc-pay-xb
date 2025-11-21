@@ -12,6 +12,7 @@ jest.mock('../../../app/config')
 describe('start and stop functions', () => {
   let consoleLogSpy
   let keepAliveSpy
+  const receiverInstances = []
 
   beforeEach(() => {
     consoleLogSpy = jest.spyOn(console, 'log').mockImplementation()
@@ -23,19 +24,19 @@ describe('start and stop functions', () => {
     keepAliveSpy.mockRestore()
   })
 
-  const receiverInstances = []
+  const mockReceiver = (action = null) => {
+    const instance = {
+      subscribe: jest.fn(() => action && action('mock message')),
+      closeConnection: jest.fn()
+    }
+    receiverInstances.push(instance)
+    return instance
+  }
 
-  test('start function when messageConfig is active', async () => {
+  test('start: processes message when active', async () => {
     messageConfig.active = true
 
-    MessageReceiver.mockImplementation((_, action) => {
-      const instance = {
-        subscribe: () => action('mock message'),
-        closeConnection: jest.fn()
-      }
-      receiverInstances.push(instance)
-      return instance
-    })
+    MessageReceiver.mockImplementation((_, action) => mockReceiver(action))
 
     await start()
 
@@ -44,42 +45,34 @@ describe('start and stop functions', () => {
     expect(console.log).toHaveBeenCalledWith('Ready to process Cross Border payment requests')
   })
 
-  test('start function when messageConfig is not active', async () => {
+  test('start: logs inactive state', async () => {
     messageConfig.active = false
+
     await start()
+
     expect(keepAliveSpy).toHaveBeenCalled()
     expect(console.log).toHaveBeenCalledWith('Cross Border adapter is not active')
   })
 
-  test('stop function when receiver is defined', async () => {
+  test('stop: closes receiver connection', async () => {
     messageConfig.active = true
 
-    MessageReceiver.mockImplementation(() => {
-      const instance = {
-        subscribe: jest.fn(),
-        closeConnection: jest.fn()
-      }
-      receiverInstances.push(instance)
-      return instance
-    })
+    MessageReceiver.mockImplementation(() => mockReceiver())
 
     await start()
-
-    const receiver = receiverInstances[receiverInstances.length - 1]
-    const closeConnectionSpy = jest.spyOn(receiver, 'closeConnection')
+    const receiver = receiverInstances.at(-1)
+    const closeSpy = jest.spyOn(receiver, 'closeConnection')
 
     await stop()
 
-    expect(closeConnectionSpy).toHaveBeenCalled()
-
-    closeConnectionSpy.mockRestore()
+    expect(closeSpy).toHaveBeenCalled()
+    closeSpy.mockRestore()
   })
 
-  // adding a test in here to cover the messaging keep-alive function
-  describe('keepAlive function', () => {
+  describe('keepAlive', () => {
     jest.useFakeTimers()
 
-    test('should call setInterval with a no-op function and a delay of 60000 ms', () => {
+    test('calls setInterval with noop every 60s', () => {
       const setIntervalSpy = jest.spyOn(global, 'setInterval')
 
       keepAlive()
