@@ -1,2 +1,0 @@
-container.xbTopicAddress: queue:ffc-pay-xb
-container.xbResponseTopicAddress: queue:ffc-pay-xb-response
