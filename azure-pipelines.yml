@@ -37,32 +37,32 @@ extends:
     sndDeployment: ${{ parameters.sndDeployment }}
     variableGroupName: ffc-pay-xb-env-var
     pr_params:
-      active: ${{ eq(variables['pr_active'], 'true') }}
-      mssqlDb: $(pr_mssqlDb)
-      mssqlHost: $(pr_mssqlHost)
-      mssqlUser: $(pr_mssqlUser)
+      container.active: ${{ eq(variables['pr_active'], 'true') }}
+      container.mssqlDb: $(pr_mssqlDb)
+      container.mssqlHost: $(pr_mssqlHost)
+      container.mssqlUser: $(pr_mssqlUser)
     snd2_params:
-      active: ${{ eq(variables['snd2_active'], 'true') }}
-      mssqlDb: $(snd2_mssqlDb)
-      mssqlHost: $(snd2_mssqlHost)
-      mssqlUser: $(snd2_mssqlUser)
+      container.active: ${{ eq(variables['snd2_active'], 'true') }}
+      container.mssqlDb: $(snd2_mssqlDb)
+      container.mssqlHost: $(snd2_mssqlHost)
+      container.mssqlUser: $(snd2_mssqlUser)
     dev_params:
-      active: ${{ eq(variables['dev_active'], 'true') }}
-      mssqlDb: $(dev_mssqlDb)
-      mssqlHost: $(dev_mssqlHost)
-      mssqlUser: $(dev_mssqlUser)
+      container.active: ${{ eq(variables['dev_active'], 'true') }}
+      container.mssqlDb: $(dev_mssqlDb)
+      container.mssqlHost: $(dev_mssqlHost)
+      container.mssqlUser: $(dev_mssqlUser)
     test_params:
-      active: ${{ eq(variables['test_active'], 'true') }}
-      mssqlDb: $(test_mssqlDb)
-      mssqlHost: $(test_mssqlHost)
-      mssqlUser: $(test_mssqlUser)
+      container.active: ${{ eq(variables['test_active'], 'true') }}
+      container.mssqlDb: $(test_mssqlDb)
+      container.mssqlHost: $(test_mssqlHost)
+      container.mssqlUser: $(test_mssqlUser)
     pre_params:
-      active: ${{ eq(variables['pre_active'], 'true') }}
-      mssqlDb: $(pre_mssqlDb)
-      mssqlHost: $(pre_mssqlHost)
-      mssqlUser: $(pre_mssqlUser)
+      container.active: ${{ eq(variables['pre_active'], 'true') }}
+      container.mssqlDb: $(pre_mssqlDb)
+      container.mssqlHost: $(pre_mssqlHost)
+      container.mssqlUser: $(pre_mssqlUser)
     prd_params:
-      active: ${{ eq(variables['prd_active'], 'true') }}
-      mssqlDb: $(prd_mssqlDb)
-      mssqlHost: $(prd_mssqlHost)
-      mssqlUser: $(prd_mssqlUser)
+      container.active: ${{ eq(variables['prd_active'], 'true') }}
+      container.mssqlDb: $(prd_mssqlDb)
+      container.mssqlHost: $(prd_mssqlHost)
+      container.mssqlUser: $(prd_mssqlUser)
