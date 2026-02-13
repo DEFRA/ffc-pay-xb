@@ -3,4 +3,6 @@ environment: production
 environmentCode: snd
 container:
   messageQueueHost: SNDFFCINFSB2001.servicebus.windows.net
-  azureStorageAccountName: snd2ffcpayst2001
+  xbTopicAddress: ffc-pay-xb
+  xbSubscriptionAddress: ffc-pay-xb
+  xbResponseTopicAddress: ffc-pay-xb-response

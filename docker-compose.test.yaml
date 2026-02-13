@@ -24,6 +24,8 @@ services:
       MESSAGE_QUEUE_HOST: servicebus-emulator
       MESSAGE_QUEUE_USER: RootManageSharedAccessKey
       MESSAGE_QUEUE_PASSWORD: SAS_KEY_VALUE
+      XB_TOPIC_ADDRESS: ffc-pay-xb-test
+      XBRESPONSE_TOPIC_ADDRESS: ffc-pay-xb-response-test
 
   ffc-pay-xb-mssql:
     volumes:

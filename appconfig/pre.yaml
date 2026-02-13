@@ -3,8 +3,9 @@ environment: production
 environmentCode: pre
 container:
   messageQueueHost: PREFFCINFSB1001.servicebus.windows.net
-  azureStorageAccountName: preffcpayst1001
-  endpointEnabled: true
+  xbTopicAddress: ffc-pay-xb
+  xbSubscriptionAddress: ffc-pay-xb
+  xbResponseTopicAddress: ffc-pay-xb-response
 secretProviderClass:
   azure:
     keyvaultName: PREFFCINFKV1001

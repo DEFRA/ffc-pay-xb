@@ -2,5 +2,7 @@
 environment: production
 environmentCode: snd2
 container:
-  azureStorageAccountName: snd2ffcpayst2001
   messageQueueHost: SNDFFCINFSB2001.servicebus.windows.net
+  xbTopicAddress: queue:ffc-pay-xb
+  xbSubscriptionAddress: ffc-pay-xb
+  xbResponseTopicAddress: queue:ffc-pay-xb-response

@@ -15,7 +15,7 @@ containerConfigMap:
   name: ffc-pay-xb-config-map
 
 containerSecret:
-  name: ffc-pay-xb-container-secret
+  name: ffc-pay-xb
   type: Opaque
 
 deployment: {}

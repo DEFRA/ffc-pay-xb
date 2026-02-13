@@ -37,26 +37,32 @@ extends:
     sndDeployment: ${{ parameters.sndDeployment }}
     variableGroupName: ffc-pay-xb-env-var
     pr_params:
+      active: ${{ eq(variables['pr_active'], 'true') }}
       mssqlDb: $(pr_mssqlDb)
       mssqlHost: $(pr_mssqlHost)
       mssqlUser: $(pr_mssqlUser)
     snd2_params:
+      active: ${{ eq(variables['snd2_active'], 'true') }}
       mssqlDb: $(snd2_mssqlDb)
       mssqlHost: $(snd2_mssqlHost)
       mssqlUser: $(snd2_mssqlUser)
     dev_params:
+      active: ${{ eq(variables['dev_active'], 'true') }}
       mssqlDb: $(dev_mssqlDb)
       mssqlHost: $(dev_mssqlHost)
       mssqlUser: $(dev_mssqlUser)
     test_params:
+      active: ${{ eq(variables['test_active'], 'true') }}
       mssqlDb: $(test_mssqlDb)
       mssqlHost: $(test_mssqlHost)
       mssqlUser: $(test_mssqlUser)
     pre_params:
+      active: ${{ eq(variables['pre_active'], 'true') }}
       mssqlDb: $(pre_mssqlDb)
       mssqlHost: $(pre_mssqlHost)
       mssqlUser: $(pre_mssqlUser)
     prd_params:
+      active: ${{ eq(variables['prd_active'], 'true') }}
       mssqlDb: $(prd_mssqlDb)
       mssqlHost: $(prd_mssqlHost)
       mssqlUser: $(prd_mssqlUser)

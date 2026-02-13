@@ -2,8 +2,10 @@
 environment: production
 environmentCode: dev
 container:
-  azureStorageAccountName: devffcpayst1001
   messageQueueHost: DEVFFCINFSB1001.servicebus.windows.net
+  xbTopicAddress: ffc-pay-xb
+  xbSubscriptionAddress: ffc-pay-xb
+  xbResponseTopicAddress: ffc-pay-xb-response
 secretProviderClass:
   azure:
     keyvaultName: DEVFFCINFKV1001

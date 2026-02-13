@@ -3,8 +3,9 @@ environment: production
 environmentCode: prd
 container:
   messageQueueHost: PRDFFCINFSB1001.servicebus.windows.net
-  azureStorageAccountName: prdffcpayst1001
-  endpointEnabled: true
+  xbTopicAddress: ffc-pay-xb
+  xbSubscriptionAddress: ffc-pay-xb
+  xbResponseTopicAddress: ffc-pay-xb-response
 secretProviderClass:
   azure:
     keyvaultName: PRDFFCINFKV1001
