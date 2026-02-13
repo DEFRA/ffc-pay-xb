@@ -11,6 +11,8 @@ secretProviderClass:
     objects:
       - objectName: prd-ffcahwr-appinsights-connectionString
         objectType: secret
+      - objectName: ffc-pay-mssql-password
+        objectType: secret
 
   secretObjects:
     - secretName: ffc-pay-xb
@@ -18,3 +20,5 @@ secretProviderClass:
       data:
         - objectName: prd-ffcahwr-appinsights-connectionString
           key: APPINSIGHTS_CONNECTIONSTRING
+        - objectName: ffc-pay-mssql-password
+          key: MSSQL_PASSWORD
