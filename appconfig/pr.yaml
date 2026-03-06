@@ -1,8 +1,8 @@
 ---
 environment: production
-environmentCode: snd2
+environmentCode: snd
 container:
   messageQueueHost: SNDFFCINFSB2001.servicebus.windows.net
-  xbTopicAddress: ffc-pay-xb
+  xbTopicAddress: queue:ffc-pay-xb
   xbSubscriptionAddress: ffc-pay-xb
-  xbResponseTopicAddress: ffc-pay-xb-response
+  xbResponseTopicAddress: queue:ffc-pay-xb-response

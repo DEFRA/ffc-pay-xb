@@ -1,0 +1,68 @@
+name: '$(Build.SourceBranchName)$(System.PullRequest.SourceBranch)$(Rev:.r)'
+
+trigger:
+  - main
+  - feature/*
+  - release/*
+
+pr:
+  - main
+  - releases/*
+
+parameters:
+  - name: prDeployment
+    type: boolean
+    default: true
+  - name: branchDeployment
+    type: boolean
+    default: true
+  - name: sndDeployment
+    type: boolean
+    default: true
+
+resources:
+  repositories:
+    - repository: templates
+      endpoint: DEFRA
+      type: github
+      name: defra/fcp-pipeline-common
+      # ref: branch-name
+
+extends:
+  template: fcp-common-pipeline.yaml@templates
+  parameters:
+    appFrameworkType: nodejs
+    prDeployment: ${{ parameters.prDeployment }}
+    branchDeployment: ${{ parameters.branchDeployment }}
+    sndDeployment: ${{ parameters.sndDeployment }}
+    variableGroupName: ffc-pay-xb-env-var
+    pr_params:
+      container.active: $(pr_active)
+      container.mssqlDb: $(pr_mssqlDb)
+      container.mssqlHost: $(pr_mssqlHost)
+      container.mssqlUser: $(pr_mssqlUser)
+    snd2_params:
+      container.active: $(snd2_active)
+      container.mssqlDb: $(snd2_mssqlDb)
+      container.mssqlHost: $(snd2_mssqlHost)
+      container.mssqlUser: $(snd2_mssqlUser)
+    dev_params:
+      container.active: $(dev_active)
+      container.mssqlDb: $(dev_mssqlDb)
+      container.mssqlHost: $(dev_mssqlHost)
+      container.mssqlUser: $(dev_mssqlUser)
+    test_params:
+      container.active: $(test_active)
+      container.mssqlDb: $(test_mssqlDb)
+      container.mssqlHost: $(test_mssqlHost)
+      container.mssqlUser: $(test_mssqlUser)
+    pre_params:
+      container.active: $(pre_active)
+      container.mssqlDb: $(pre_mssqlDb)
+      container.mssqlHost: $(pre_mssqlHost)
+      container.mssqlUser: $(pre_mssqlUser)
+    prd_params:
+      container.active: $(prd_active)
+      container.mssqlDb: $(prd_mssqlDb)
+      container.mssqlHost: $(prd_mssqlHost)
+      container.mssqlUser: $(prd_mssqlUser)

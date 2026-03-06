@@ -1,0 +1,21 @@
+---
+environment: production
+environmentCode: pre
+container:
+  messageQueueHost: PREFFCINFSB1001.servicebus.windows.net
+  xbTopicAddress: ffc-pay-xb
+  xbSubscriptionAddress: ffc-pay-xb
+  xbResponseTopicAddress: ffc-pay-xb-response
+secretProviderClass:
+  azure:
+    keyvaultName: PREFFCINFKV1001
+    objects:
+      - objectName: pre-ffcahwr-appinsights-connectionString
+        objectType: secret
+
+  secretObjects:
+    - secretName: ffc-pay-xb
+      type: Opaque
+      data:
+        - objectName: pre-ffcahwr-appinsights-connectionString
+          key: APPINSIGHTS_CONNECTIONSTRING
