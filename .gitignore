@@ -4,5 +4,4 @@ helm/**/*.lock
 *.tgz
 .vscode
 .env
-
 .gitleaks-shared/
