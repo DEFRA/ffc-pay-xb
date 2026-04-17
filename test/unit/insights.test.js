@@ -1,15 +1,16 @@
-describe('application insights', () => {
+describe('Application Insights', () => {
   const DEFAULT_ENV = process.env
-  let applicationInsights
+  let useAzureMonitor
 
   beforeEach(() => {
     jest.resetModules()
-    jest.mock('applicationinsights', () => ({
-      setup: jest.fn().mockReturnThis(),
-      start: jest.fn(),
-      defaultClient: { context: { keys: [], tags: [] } }
+
+    jest.mock('@azure/monitor-opentelemetry', () => ({
+      useAzureMonitor: jest.fn(),
     }))
-    applicationInsights = require('applicationinsights')
+
+    useAzureMonitor = require('@azure/monitor-opentelemetry').useAzureMonitor
+
     process.env = { ...DEFAULT_ENV }
   })
 
@@ -17,15 +18,21 @@ describe('application insights', () => {
     process.env = DEFAULT_ENV
   })
 
-  const loadInsights = () => require('../../app/insights')
+  test('does not setup application insights if no connection string', () => {
+    process.env.APPINSIGHTS_CONNECTIONSTRING = undefined
+    const appInsights = require('../../app/insights')
 
-  test.each([
-    [undefined, 0],
-    ['test-key', 1]
-  ])('setup called %s → %s times', (connString, expectedCalls) => {
-    process.env.APPINSIGHTS_CONNECTIONSTRING = connString
-    const appInsights = loadInsights()
     appInsights.setup()
-    expect(applicationInsights.setup).toHaveBeenCalledTimes(expectedCalls)
+
+    expect(useAzureMonitor).not.toHaveBeenCalled()
+  })
+
+  test('does setup application insights if connection string present', () => {
+    process.env.APPINSIGHTS_CONNECTIONSTRING = 'test-connection-string'
+    const appInsights = require('../../app/insights')
+
+    appInsights.setup()
+
+    expect(useAzureMonitor).toHaveBeenCalledTimes(1)
   })
 })
