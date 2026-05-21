@@ -6,7 +6,10 @@ services:
     build:
       target: development
     depends_on:
-      - servicebus-emulator
+      ffc-pay-xb-mssql:
+        condition: service_healthy
+      servicebus-emulator:
+        condition: service_started
     image: ffc-pay-xb-development
     container_name: ffc-pay-xb-test
     volumes:
@@ -30,6 +33,12 @@ services:
   ffc-pay-xb-mssql:
     volumes:
       - mssql_data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -C -U sa -P "$$MSSQL_SA_PASSWORD" -Q "SELECT 1 FROM [RPA.Finance.CrossBorder.PaymentEngine].[dbo].[messages]" || exit 1
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 30s
   
   sqledge:
     container_name: "sqledge"
