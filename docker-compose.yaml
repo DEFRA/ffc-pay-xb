@@ -30,4 +30,10 @@ services:
     volumes:
       - ./scripts/mssql:/usr/config
     entrypoint: /usr/config/entrypoint.sh
+    # reduces intermittent race conditions by ensuring the database is ready before the app starts
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -C -U sa -P "ThisIsNotReal!123" -Q "SELECT 1 FROM [RPA.Finance.CrossBorder.PaymentEngine].[dbo].[messages]" || exit 1
+      interval: 5s
+      retries: 20
+      start_period: 30s
   

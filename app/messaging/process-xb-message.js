@@ -4,7 +4,7 @@ const { saveToCrossBorderPaymentEngine } = require('./save-to-cross-border-payme
 const processXbMessage = async (message, receiver) => {
   try {
     const paymentRequest = message.body
-    console.log('Cross Border payment request received:', { frn: paymentRequest.frn, sbi: paymentRequest.sbi, invoiceNumber: paymentRequest.invoiceNumber })
+    console.log('Cross Border payment request received:', { frn: paymentRequest.frn, invoiceNumber: paymentRequest.invoiceNumber })
     const { id, convertedPaymentRequest } = convertPaymentRequestToXml(paymentRequest)
     await saveToCrossBorderPaymentEngine(id, convertedPaymentRequest)
     await receiver.completeMessage(message)
