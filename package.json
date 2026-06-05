@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-xb",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "description": "Cross Border adapter",
   "homepage": "https://github.com/DEFRA/ffc-pay-xb",
   "main": "app/index.js",
@@ -46,6 +46,7 @@
     ]
   },
   "overrides": {
-    "protobufjs": "8.2.0"
+    "protobufjs": "8.2.0",
+    "uuid": "11.1.1"
   }
 }
