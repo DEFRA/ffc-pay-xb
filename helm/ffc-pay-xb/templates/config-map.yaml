@@ -5,6 +5,7 @@ data:
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
   OTEL_SERVICE_NAME: {{ quote .Values.name }}
   MESSAGE_QUEUE_HOST: {{ quote .Values.container.messageQueueHost }}
+  AZURE_LOG_LEVEL: {{ quote .Values.container.azureLogLevel }}
   {{- if (.Values.environmentCode) }}
   XB_TOPIC_ADDRESS: {{ .Values.container.xbTopicAddress }}-{{ .Values.environmentCode }}
   XBRESPONSE_TOPIC_ADDRESS: {{ .Values.container.xbResponseTopicAddress }}-{{ .Values.environmentCode }}
