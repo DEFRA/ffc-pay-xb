@@ -33,6 +33,7 @@ container:
   mssqlHost: ffc-pay-xb-mssql
   mssqlDb: RPA.Finance.CrossBorder.PaymentEngine (Production)
   mssqlUser: not-real
+  azureLogLevel: error
 
 workloadIdentity: true
 
