@@ -15,6 +15,8 @@ data:
   {{- end }}
   XB_SUBSCRIPTION_ADDRESS: {{ quote .Values.container.xbSubscriptionAddress }}
   ACTIVE: {{ quote .Values.container.active }}
+  RESPONSE_INTERVAL: {{ quote .Values.container.responseInterval }}
+  KEEP_ALIVE_INTERVAL: {{ quote .Values.container.keepAliveInterval }}
   MSSQL_HOST: {{ quote .Values.container.mssqlHost }}
   MSSQL_USER: {{ quote .Values.container.mssqlUser }}
   MSSQL_DB: {{ quote .Values.container.mssqlDb }}

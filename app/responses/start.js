@@ -8,7 +8,7 @@ const start = async () => {
     } catch (err) {
       console.error(err)
     } finally {
-      setTimeout(start, responseConfig.interval)
+      setTimeout(start, responseConfig.responseInterval)
     }
   }
 }
