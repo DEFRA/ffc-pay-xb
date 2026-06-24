@@ -2,7 +2,7 @@ const Joi = require('joi')
 
 const schema = Joi.object({
   active: Joi.bool().default(true),
-  interval: Joi.number().default(120000)
+  interval: Joi.number().default(60000)
 })
 const config = {
   active: process.env.ACTIVE,

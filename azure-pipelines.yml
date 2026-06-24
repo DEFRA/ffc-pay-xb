@@ -38,31 +38,43 @@ extends:
     variableGroupName: ffc-pay-xb-env-var
     pr_params:
       container.active: $(pr_active)
+      container.responseInterval: $(pr_responseInterval)
+      container.keepAliveInterval: $(pr_keepAliveInterval)
       container.mssqlDb: $(pr_mssqlDb)
       container.mssqlHost: $(pr_mssqlHost)
       container.mssqlUser: $(pr_mssqlUser)
     snd2_params:
       container.active: $(snd2_active)
+      container.responseInterval: $(snd2_responseInterval)
+      container.keepAliveInterval: $(snd2_keepAliveInterval)
       container.mssqlDb: $(snd2_mssqlDb)
       container.mssqlHost: $(snd2_mssqlHost)
       container.mssqlUser: $(snd2_mssqlUser)
     dev_params:
       container.active: $(dev_active)
+      container.responseInterval: $(dev_responseInterval)
+      container.keepAliveInterval: $(dev_keepAliveInterval)
       container.mssqlDb: $(dev_mssqlDb)
       container.mssqlHost: $(dev_mssqlHost)
       container.mssqlUser: $(dev_mssqlUser)
     test_params:
       container.active: $(test_active)
+      container.responseInterval: $(test_responseInterval)
+      container.keepAliveInterval: $(test_keepAliveInterval)
       container.mssqlDb: $(test_mssqlDb)
       container.mssqlHost: $(test_mssqlHost)
       container.mssqlUser: $(test_mssqlUser)
     pre_params:
       container.active: $(pre_active)
+      container.responseInterval: $(pre_responseInterval)
+      container.keepAliveInterval: $(pre_keepAliveInterval)
       container.mssqlDb: $(pre_mssqlDb)
       container.mssqlHost: $(pre_mssqlHost)
       container.mssqlUser: $(pre_mssqlUser)
     prd_params:
       container.active: $(prd_active)
+      container.responseInterval: $(prd_responseInterval)
+      container.keepAliveInterval: $(prd_keepAliveInterval)
       container.mssqlDb: $(prd_mssqlDb)
       container.mssqlHost: $(prd_mssqlHost)
       container.mssqlUser: $(prd_mssqlUser)
