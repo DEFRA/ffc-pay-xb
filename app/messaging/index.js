@@ -1,15 +1,18 @@
 const { messageConfig } = require('../config')
 const { keepAlive } = require('./keep-alive')
-const { MessageReceiver } = require('ffc-messaging')
+const { createServiceBusClient, createReceiver, subscribeReceiver, closeSenders } = require('./service-bus')
 const { processXbMessage } = require('./process-xb-message.js')
+
+let sbClient
 let receiver
 
 const start = async () => {
   if (messageConfig.active) {
-    const xbAction = message => processXbMessage(message, receiver)
-    receiver = new MessageReceiver(messageConfig.xbSubscription, xbAction)
-    await receiver.subscribe()
+    sbClient = createServiceBusClient(messageConfig.xbSubscription)
+    receiver = createReceiver(sbClient, messageConfig.xbSubscription)
+    const errorHandler = (err) => console.error('Error receiving message:', err)
 
+    subscribeReceiver(receiver, processXbMessage, errorHandler)
     console.log('Ready to process Cross Border payment requests')
   } else {
     console.log('Cross Border adapter is not active')
@@ -18,7 +21,16 @@ const start = async () => {
 }
 
 const stop = async () => {
-  await receiver.closeConnection()
+  if (sbClient) {
+    try {
+      await sbClient.close()
+    } catch (err) {
+      console.error('Error closing Service Bus client:', err)
+    }
+    sbClient = null
+  }
+  await closeSenders()
+  receiver = null
 }
 
 module.exports = { start, stop }
