@@ -6,17 +6,8 @@ const { databaseConfig } = require('../../../app/config')
 
 const json = fs.readFileSync(path.resolve(__dirname, '../../mocks/json.json'), 'utf8')
 
-const mockSendMessage = jest.fn()
-jest.mock('ffc-messaging', () => {
-  return {
-    MessageSender: jest.fn().mockImplementation(() => {
-      return {
-        sendMessage: mockSendMessage,
-        closeConnection: jest.fn()
-      }
-    })
-  }
-})
+jest.mock('../../../app/messaging/send-message')
+const { sendMessage: mockSendMessage } = require('../../../app/messaging/send-message')
 
 const receiver = {
   completeMessage: jest.fn(),
@@ -37,20 +28,16 @@ describe('process cross border updates', () => {
     await sql.query`DELETE FROM messages`
     await processXbMessage(message, receiver)
     await sql.query`UPDATE dbo.messages SET message_out = message_in`
+    mockSendMessage.mockClear()
   })
 
-  test('should send message to cross border queue', async () => {
+  test('should send message to response topic', async () => {
     await processResponses()
     expect(mockSendMessage).toHaveBeenCalled()
   })
 
   test('should send message in json format', async () => {
     await processResponses()
-    expect(mockSendMessage.mock.calls[0][0].body.invoiceNumber).toBe('S0000002C0000002V001')
-  })
-
-  test('should close message connection when sent', async () => {
-    await processResponses()
-    expect(mockSendMessage.mock.instances[0].closeConnection).toHaveBeenCalled()
+    expect(mockSendMessage.mock.calls[0][0].invoiceNumber).toBe('S0000002C0000002V001')
   })
 })
