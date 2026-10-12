@@ -1,4 +1,4 @@
-const subscribeReceiver = (receiver, action, errorHandler, config) => {
+const subscribeReceiver = (receiver, action, errorHandler, config = {}) => {
   const wrappedAction = async (message) => {
     await action(message, receiver)
   }
