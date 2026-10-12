@@ -14,9 +14,7 @@ describe('subscribeReceiver', () => {
   })
 
   test('subscribes with wrapped action and error handler', async () => {
-    const config = {}
-
-    await subscribeReceiver(receiver, action, errorHandler, config)
+    await subscribeReceiver(receiver, action, errorHandler)
 
     expect(receiver.subscribe).toHaveBeenCalledWith({
       processMessage: expect.any(Function),

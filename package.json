@@ -25,7 +25,7 @@
   ],
   "license": "OGL-UK-3.0",
   "dependencies": {
-    "@azure/monitor-opentelemetry": "1.19.0",
+    "@azure/monitor-opentelemetry": "1.20.0",
     "@azure/service-bus": "7.9.5",
     "joi": "18.2.9",
     "log-timestamp": "0.3.0",
